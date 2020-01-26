@@ -1,0 +1,4 @@
+[submodule "cheerio-cli"]
+	path = cheerio-cli
+	url = https://github.com/vogler/cheerio-cli.git
+	branch = fix-closed-pipe
