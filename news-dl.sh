@@ -9,6 +9,7 @@ mkdir -p videos
 cd "$(dirname "$0")/videos"
 
 youtube-dl https://www.sat1.de/news/video/abendnachrichten-$(date '+%d-%m-%Y')-clip
+youtube-dl https://www.sat1.de/news/video/abendnachrichten-$(date '+%d-%m-%Y')-ganze-folge # sometimes the URL is different, only Tuesdays?
 
 youtube-dl https://www.tagesschau.de/sendung/tagesschau/index.html
 
