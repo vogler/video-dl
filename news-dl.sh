@@ -10,6 +10,7 @@ cd "$(dirname "$0")/videos"
 
 youtube-dl https://www.sat1.de/news/video/abendnachrichten-$(date '+%d-%m-%Y')-clip
 youtube-dl https://www.sat1.de/news/video/abendnachrichten-$(date '+%d-%m-%Y')-ganze-folge # sometimes the URL is different, only Tuesdays?
+youtube-dl https://www.sat1.de/news/video/abendnachrichten-$(date '+%d-%B-%Y')-clip # on 09.04.2020 they changed to full month name: 09-april-2020-clip
 
 youtube-dl https://www.tagesschau.de/sendung/tagesschau/index.html
 
