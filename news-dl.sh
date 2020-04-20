@@ -12,6 +12,7 @@ youtube-dl https://www.sat1.de/news/video/abendnachrichten-$(date '+%d-%m-%Y')-c
 youtube-dl https://www.sat1.de/news/video/abendnachrichten-$(date '+%d-%m-%Y')-ganze-folge # sometimes the URL is different, only Tuesdays?
 youtube-dl https://www.sat1.de/news/video/abendnachrichten-$(date '+%d-%B-%Y')-clip # on 09.04.2020 they changed to full month name: 09-april-2020-clip
 youtube-dl https://www.sat1.de/news/video/abendnachrichten-$(date '+%-d-%-m-%Y')-clip # e.g. 1-1-2020; on 18.04.2020 they changed to non-leading zero for month: 18-4-2020-clip
+youtube-dl https://www.sat1.de/news/video/abendnachrichten-$(date '+%-d-%-m-%Y')-ganze-folge # 19-4-2020-ganze-folge
 
 youtube-dl https://www.tagesschau.de/sendung/tagesschau/index.html
 
