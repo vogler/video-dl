@@ -7,9 +7,9 @@
 # serve with: cd videos; npx http-server
 # open rpi4:8080
 
-mkdir -p videos
-cd "$(dirname "$0")/videos"
-
+videos="$(dirname "$0")/videos"
+mkdir -p $videos
+cd $videos
 function ytdl { # abort before youtube-dl if http status code is not 200; not needed, but faster than letting youtube-dl try first
   curl -o /dev/null --silent --head --write-out '%{http_code}\n' $1 | grep -q 200 && youtube-dl $1
 }
