@@ -5,7 +5,7 @@
 # 0 22   *   *   *     ~/news/news-dl.sh
 
 # serve with: cd videos; npx http-server
-# open rpi4.local:8080
+# open rpi4:8080
 
 mkdir -p videos
 cd "$(dirname "$0")/videos"
