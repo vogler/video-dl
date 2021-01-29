@@ -21,7 +21,9 @@ ytdl https://www.sat1.de/news/video/abendnachrichten-$(date '+%d-%B-%Y')-clip # 
 ytdl https://www.sat1.de/news/video/abendnachrichten-$(date '+%-d-%-m-%Y')-clip # e.g. 1-1-2020; on 18.04.2020 they changed to non-leading zero for month: 18-4-2020-clip
 ytdl https://www.sat1.de/news/video/abendnachrichten-$(date '+%-d-%-m-%Y')-ganze-folge # 19-4-2020-ganze-folge
 
-ytdl https://www.tagesschau.de/sendung/tagesschau/index.html
+# ytdl https://www.tagesschau.de/sendung/tagesschau/index.html # stopped working on 26.01.2021 since ytdl can't extract download link
+# hq download link example: https://download.media.tagesschau.de/video/2021/0128/TV-20210128-2021-5000.webxl.h264.mp4
+wget https://download.media.tagesschau.de/video/$(date '+%Y')/$(date '+%m%d')/TV-$(date '+%Y%m%d-%Y')-5000.webxl.h264.mp4
 
 # changed on 05.01.21 since 'boerse.ard.de zieht zu tagesschau.de (15.12.20)'
 # old URL was https://www.daserste.de/information/wirtschaft-boerse/boerse-im-ersten/videosextern/index.html
