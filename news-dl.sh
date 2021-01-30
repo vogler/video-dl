@@ -23,7 +23,7 @@ ytdl https://www.sat1.de/news/video/abendnachrichten-$(date '+%-d-%-m-%Y')-ganze
 
 # ytdl https://www.tagesschau.de/sendung/tagesschau/index.html # stopped working on 26.01.2021 since ytdl can't extract download link
 # hq download link example: https://download.media.tagesschau.de/video/2021/0128/TV-20210128-2021-5000.webxl.h264.mp4 but the part with 5000 changes for each episode. So we need to grep for the link.
-wget -c $(curl -s https://www.tagesschau.de/sendung/tagesschau/ | egrep -o 'https[^;]+webxl\.h264\.mp4' | head -n1)
+wget -c $(curl -s https://www.tagesschau.de/multimedia/ | grep -oP 'https[^;]+-20\d\d-[^;]+webxl\.h264\.mp4' | head -n1)
 
 # changed on 05.01.21 since 'boerse.ard.de zieht zu tagesschau.de (15.12.20)'
 # old URL was https://www.daserste.de/information/wirtschaft-boerse/boerse-im-ersten/videosextern/index.html
