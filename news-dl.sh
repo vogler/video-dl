@@ -2,7 +2,7 @@
 
 # run this script as a cronjob to have news to watch for breakfast
 # $ crontab -e
-# 0 22   *   *   *     ~/news/news-dl.sh
+# 55 20,23   *   *   *     ~/news/news-dl.sh >> /var/log/news-dl.log 2>&1
 
 # serve with: cd videos; npx http-server
 # open rpi4:8080
