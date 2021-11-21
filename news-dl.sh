@@ -43,5 +43,5 @@ wget -c $(curl -s https://www.tagesschau.de/multimedia/ | grep -oP 'https[^;]+-2
 # new:
 youtube-dl "https://daserste.de$(curl -s https://www.daserste.de/information/wirtschaft-boerse/boerse-im-ersten/videosextern/index.html | grep -o '/.*boerse-vor-acht-video-.*\.html' | head -n1)"
 
-# delete files with an access time older than 7 days
-find . -type f -atime +7 -exec rm -f {} \;
+# delete files with an change/access time older than 7 days
+find . -type f -ctime +7 -exec rm -f {} \; # -atime was a problem since ytdl or sat1 had year set to 2000
