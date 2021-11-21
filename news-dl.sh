@@ -1,4 +1,4 @@
-#!/bin/bash 
+#!/bin/zsh 
 
 # run this script as a cronjob to have news to watch for breakfast
 # $ crontab -e
@@ -15,7 +15,7 @@ function ytdl { # abort before youtube-dl if http status code is not 200; not ne
   curl -o /dev/null --silent --head --write-out '%{http_code}\n' $1 | grep -q 200 && youtube-dl $1
 }
 
-# opt='--date=yesterday'
+# opt=--date="1 days ago"
 
 ytdl https://www.sat1.de/news/video/abendnachrichten-$(date $opt '+%d-%m-%Y')-clip # e.g. 01-01-2020
 ytdl https://www.sat1.de/news/video/abendnachrichten-$(date $opt '+%d-%m-%Y')-clip2 # happend on 12-06-2020
