@@ -2,11 +2,12 @@
 
 # run this script as a cronjob to have news to watch for breakfast
 # $ crontab -e
-# 55 20,23   *   *   *     ~/news/news-dl.sh >> /var/log/news-dl.log 2>&1
+# 55 20,23   *   *   *     ~/news/news-dl.sh 2>&1 | tee -a /tmp/news-dl.log
 
 # serve with: cd videos; npx http-server
 # open rpi4:8080
 
+date # print datetime for log
 videos="$(dirname "$0")/videos"
 mkdir -p $videos
 cd $videos
