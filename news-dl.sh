@@ -42,7 +42,7 @@ wget -c $(curl -s https://www.tagesschau.de/sendung/tagesschau/ | grep -oP 'http
   # latest=$(curl -s https://boerse.ard.de/multimedia/audios-und-videos/boerse-vor-acht/index.html | grep -o 'https.*boerse-vor-acht/hr_.*\.html' | head -n1)
   # wget -nc $(curl -s $latest | grep -o "https://.*1280x720-50p-5000kbit\.mp4")
 # new:
-youtube-dl "https://daserste.de$(curl -s https://www.daserste.de/information/wirtschaft-boerse/boerse-im-ersten/videosextern/index.html | grep -o '/.*boerse-vor-acht-video-.*\.html' | head -n1)"
+youtube-dl "https://daserste.de$(curl -s https://www.daserste.de/information/wirtschaft-boerse/wirtschaft-vor-acht/videos/index.html | grep -o '/.*wirtschaft-vor-acht-video-.*\.html' | head -n1)"
 
 # delete files with an change/access time older than 7 days
 find . -type f -ctime +7 -exec rm -f {} \; # -atime was a problem since ytdl or sat1 had year set to 2000
