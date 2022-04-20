@@ -21,6 +21,7 @@ function ytdl { # abort before youtube-dl if http status code is not 200; not ne
 ytdl https://www.sat1.de/news/video/abendnachrichten-$(date $opt '+%d-%m-%Y')-clip # e.g. 01-01-2020
 ytdl https://www.sat1.de/news/video/abendnachrichten-$(date $opt '+%d-%m-%Y')-clip2 # happend on 12-06-2020
 ytdl https://www.sat1.de/news/video/abendnachrichten-$(date $opt '+%d-%m-%Y')-ganze-folge # sometimes the URL is different, only Tuesdays?
+ytdl https://www.sat1.de/news/video/abendnachrichten-vom-$(date $opt '+%d-%m-%Y')-ganze-folge # vom-19-04-2022
 ytdl https://www.sat1.de/news/video/abendnachrichten-$(date $opt '+%d-%B-%Y')-clip # on 09.04.2020 they changed to full month name: 09-april-2020-clip
 ytdl https://www.sat1.de/news/video/abendnachrichten-$(date $opt '+%-d-%-m-%Y')-clip # e.g. 1-1-2020; on 18.04.2020 they changed to non-leading zero for month: 18-4-2020-clip
 ytdl https://www.sat1.de/news/video/abendnachrichten-$(date $opt '+%-d-%-m-%Y')-ganze-folge # 19-4-2020-ganze-folge
