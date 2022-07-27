@@ -45,5 +45,7 @@ wget -c $(curl -s https://www.tagesschau.de/sendung/tagesschau/ | grep -oP 'http
 # new:
 youtube-dl "https://daserste.de$(curl -s https://www.daserste.de/information/wirtschaft-boerse/wirtschaft-vor-acht/videos/index.html | grep -o '/.*wirtschaft-vor-acht-video-.*\.html' | head -n1)"
 
-# delete files with an change/access time older than 7 days
-find . -type f -ctime +7 -exec rm -f {} \; # -atime was a problem since ytdl or sat1 had year set to 2000
+# delete files older than 7 days. TODO only delete if not accessed
+# `mount` says / is mounted with noatime - so access times are not updated
+# https://unix.stackexchange.com/questions/8840/last-time-file-opened
+find . -type f -ctime +7 -exec rm -f {} \; # -atime/-mtime were problematic since ytdl sets atime/mtime to Last-modified header (unless --no-mtime) and sat1 has it set to constant 2000-11-19 9:52. However, -ctime (stat: Change) is fine since it changes when metadata change which happens on download.
