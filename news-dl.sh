@@ -43,7 +43,7 @@ wget -c $(curl -s https://www.tagesschau.de/sendung/tagesschau/ | grep -oP 'http
   # latest=$(curl -s https://boerse.ard.de/multimedia/audios-und-videos/boerse-vor-acht/index.html | grep -o 'https.*boerse-vor-acht/hr_.*\.html' | head -n1)
   # wget -nc $(curl -s $latest | grep -o "https://.*1280x720-50p-5000kbit\.mp4")
 # new:
-youtube-dl "https://daserste.de$(curl -s https://www.daserste.de/information/wirtschaft-boerse/wirtschaft-vor-acht/videos/index.html | grep -o '/.*wirtschaft-vor-acht-video-.*\.html' | head -n1)"
+youtube-dl "https://www.daserste.de$(curl -s https://www.daserste.de/information/wirtschaft-boerse/wirtschaft-vor-acht/videos/index.html | grep -o '/.*wirtschaft-vor-acht-video-.*\.html' | head -n1)"
 
 # delete files older than 7 days. TODO only delete if not accessed
 # `mount` says / is mounted with noatime - so access times are not updated
