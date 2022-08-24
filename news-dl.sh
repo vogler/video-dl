@@ -13,7 +13,7 @@ mkdir -p $videos
 cd $videos
 function ytdl { # abort before youtube-dl if http status code is not 200; not needed, but faster than letting youtube-dl try first
   echo $1
-  curl -o /dev/null --silent --head --write-out '%{http_code}\n' $1 | grep -q 200 && youtube-dl $1
+  curl -o /dev/null --silent --head --write-out '%{http_code}\n' $1 | grep -q 200 && yt-dlp $1 # switched to yt-dlp since youtube-dl started to time out on sat1 videos
 }
 
 # opt=--date="1 days ago"
@@ -28,7 +28,7 @@ ytdl https://www.sat1.de/news/video/abendnachrichten-$(date $opt '+%-d-%-m-%Y')-
 
 # ytdl https://www.tagesschau.de/sendung/tagesschau/index.html # stopped working on 26.01.2021 since ytdl can't extract download link
 # hq download link example: https://download.media.tagesschau.de/video/2021/0128/TV-20210128-2021-5000.webxl.h264.mp4 but the part with 5000 changes for each episode. So we need to grep for the link. The part after the date is the time it was created/uploaded which so far was in 20:20-21:02.
-wget -c $(curl -s https://www.tagesschau.de/sendung/tagesschau/ | grep -oP 'https[^;]+-2[01]\d\d-[^;]+webxl\.h264\.mp4' | sort -r | head -n1)
+wget --timeout=5 -c $(curl -s https://www.tagesschau.de/sendung/tagesschau/ | grep -oP 'https[^;]+-2[01]\d\d-[^;]+webxl\.h264\.mp4' | sort -r | head -n1)
 
 # changed on 05.01.21 since 'boerse.ard.de zieht zu tagesschau.de (15.12.20)'
 # old URL was https://www.daserste.de/information/wirtschaft-boerse/boerse-im-ersten/videosextern/index.html
@@ -43,6 +43,7 @@ wget -c $(curl -s https://www.tagesschau.de/sendung/tagesschau/ | grep -oP 'http
   # latest=$(curl -s https://boerse.ard.de/multimedia/audios-und-videos/boerse-vor-acht/index.html | grep -o 'https.*boerse-vor-acht/hr_.*\.html' | head -n1)
   # wget -nc $(curl -s $latest | grep -o "https://.*1280x720-50p-5000kbit\.mp4")
 # new:
+# somehow youtube-dl is much faster here than yt-dlp
 youtube-dl "https://www.daserste.de$(curl -s https://www.daserste.de/information/wirtschaft-boerse/wirtschaft-vor-acht/videos/index.html | grep -o '/.*wirtschaft-vor-acht-video-.*\.html' | head -n1)"
 
 # delete files older than 7 days. TODO only delete if not accessed
