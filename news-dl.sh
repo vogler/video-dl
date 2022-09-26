@@ -44,7 +44,7 @@ wget --timeout=5 -c $(curl -s https://www.tagesschau.de/sendung/tagesschau/ | gr
   # wget -nc $(curl -s $latest | grep -o "https://.*1280x720-50p-5000kbit\.mp4")
 # new:
 # somehow youtube-dl is much faster here than yt-dlp
-youtube-dl "https://www.daserste.de$(curl -s https://www.daserste.de/information/wirtschaft-boerse/wirtschaft-vor-acht/videos/index.html | grep -o '/.*wirtschaft-vor-acht-video-.*\.html' | head -n1)"
+youtube-dl "https://www.ardmediathek.de$(curl -s https://www.ardmediathek.de/sendung/wirtschaft-vor-acht/Y3JpZDovL2Rhc2Vyc3RlLmRlL3dpcnRzY2hhZnQgdm9yIGFjaHQ | grep -P -o '/video/wirtschaft-vor-acht/.*?(?=")' | head -n1)"
 
 # delete files older than 7 days. TODO only delete if not accessed
 # `mount` says / is mounted with noatime - so access times are not updated
