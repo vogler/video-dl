@@ -1,0 +1,22 @@
+{
+  "name": "youtv-dl",
+  "version": "1.0.0",
+  "description": "Download recorded videos from youtv.de",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vogler/video-dl.git"
+  },
+  "keywords": [
+    "video-downloader"
+  ],
+  "author": "Ralf Vogler",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/vogler/video-dl/issues"
+  },
+  "homepage": "https://github.com/vogler/video-dl#readme"
+}
