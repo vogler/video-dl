@@ -18,5 +18,8 @@
   "bugs": {
     "url": "https://github.com/vogler/video-dl/issues"
   },
-  "homepage": "https://github.com/vogler/video-dl#readme"
+  "homepage": "https://github.com/vogler/video-dl#readme",
+  "dependencies": {
+    "playwright": "^1.30.0"
+  }
 }
