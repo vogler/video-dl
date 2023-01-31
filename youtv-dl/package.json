@@ -2,7 +2,7 @@
   "name": "youtv-dl",
   "version": "1.0.0",
   "description": "Download recorded videos from youtv.de",
-  "main": "index.js",
+  "bin": "youtv-dl.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -19,6 +19,7 @@
     "url": "https://github.com/vogler/video-dl/issues"
   },
   "homepage": "https://github.com/vogler/video-dl#readme",
+  "type": "module",
   "dependencies": {
     "playwright": "^1.30.0"
   }
