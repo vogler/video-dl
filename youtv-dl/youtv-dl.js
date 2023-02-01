@@ -1,12 +1,14 @@
 #!/usr/bin/env node
 
 import { firefox } from 'playwright';
+import { download } from './util.js';
 
 // console.log(process.argv); // ['.../node', '.../youtv-dl', ...]
 const auth = process.argv.includes('auth');
 const show = auth || process.env.SHOW == '1'; // can also set PWDEBUG=1 to show UI and debug
 
 const cfg = {
+  videoDir: process.env.VIDEODIR || 'data/videos',
   headless: !show,
   width: Number(process.env.WIDTH) || 1280, // width of the opened browser
   height: Number(process.env.HEIGHT) || 1280, // height of the opened browser
@@ -36,10 +38,25 @@ try {
   }).catch(_ => { });
   await page.waitForSelector('.recordings');
   console.log('Logged in.');
-  console.log('Recordings:', await page.locator('.broadcasts-table-title').count());
-  for (const l of await page.locator('.broadcasts-table-title').all()) {
-    console.log('-', await l.innerText());
+  await page.waitForSelector('.broadcasts-table'); // TODO fine if empty?
+  const rows = page.locator('tbody tr');
+  console.log('Recordings:', await rows.count());
+  const urls = [];
+  for (const r of await rows.all()) {
+    const [title, subtitle] = (await r.locator('.broadcasts-table-cell-title').innerText()).split('\n');
+    const [time, duration] = (await r.locator('.broadcasts-table-cell-date').innerText()).split('\n');
+    console.log(`- ${time}  (${duration})  ${title} - ${subtitle}`);
+    urls.push(await r.locator('a').getAttribute('href'));
+    await r.locator('.action-play').click();
+    console.log(' ', page.url());
+    await page.waitForSelector('video');
+    const videoUrl = await page.locator('video').getAttribute('src');
+    console.log(' ', videoUrl);
+    await download(videoUrl, cfg.videoDir);
+    console.log(' ', 'done');
+    // await page.pause();
   }
+  // console.log(urls);
   // await page.pause();
   // process.exit(1);
 } catch (error) {
