@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 import { firefox } from 'playwright';
-import { download } from './util.js';
+import { downloadProgress } from './util.js';
 
 // console.log(process.argv); // ['.../node', '.../youtv-dl', ...]
 const auth = process.argv.includes('auth');
@@ -52,7 +52,7 @@ try {
     await page.waitForSelector('video');
     const videoUrl = await page.locator('video').getAttribute('src');
     console.log(' ', 'Downloading', videoUrl, 'to', cfg.videoDir);
-    const resp = await download(videoUrl, cfg.videoDir);
+    const resp = await downloadProgress(videoUrl, cfg.videoDir);
     if (resp == 'exists')
       console.log(' ', 'File already exists!');
     else
