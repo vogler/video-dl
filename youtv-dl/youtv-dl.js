@@ -48,12 +48,15 @@ try {
     console.log(`- ${time}  (${duration})  ${title} - ${subtitle}`);
     urls.push(await r.locator('a').getAttribute('href'));
     await r.locator('.action-play').click();
-    console.log(' ', page.url());
+    // console.log(' ', page.url());
     await page.waitForSelector('video');
     const videoUrl = await page.locator('video').getAttribute('src');
-    console.log(' ', videoUrl);
-    await download(videoUrl, cfg.videoDir);
-    console.log(' ', 'done');
+    console.log(' ', 'Downloading', videoUrl, 'to', cfg.videoDir);
+    const resp = await download(videoUrl, cfg.videoDir);
+    if (resp == 'exists')
+      console.log(' ', 'File already exists!');
+    else
+      console.log(' ', 'Downloaaded', resp);
     // await page.pause();
   }
   // console.log(urls);
