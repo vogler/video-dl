@@ -36,17 +36,16 @@ try {
     }
     console.log('Please use the opened browser to login.');
   }).catch(_ => { });
-  await page.waitForSelector('.recordings');
+  await page.waitForSelector('.recordings'); // blocks if not logged in
   console.log('Logged in.');
+
   await page.waitForSelector('.broadcasts-table'); // TODO fine if empty?
   const rows = page.locator('tbody tr');
   console.log('Recordings:', await rows.count());
-  const urls = [];
   for (const r of await rows.all()) {
     const [title, subtitle] = (await r.locator('.broadcasts-table-cell-title').innerText()).split('\n');
     const [time, duration] = (await r.locator('.broadcasts-table-cell-date').innerText()).split('\n');
     console.log(`- ${time}  (${duration})  ${title} - ${subtitle}`);
-    urls.push(await r.locator('a').getAttribute('href'));
     await r.locator('.action-play').click();
     // console.log(' ', page.url());
     await page.waitForSelector('video');
@@ -57,14 +56,11 @@ try {
       console.log(' ', 'File already exists!');
     else
       console.log(' ', 'Downloaaded', resp);
-    // await page.pause();
+    await page.waitForLoadState(); // needed if file exists
+    await page.goBack(); // without the wait above got Error: NS_BINDING_ABORTED; same for goto()
   }
-  // console.log(urls);
   // await page.pause();
-  // process.exit(1);
 } catch (error) {
   console.error(error); // .toString()?
-} finally {
-
 }
 await context.close();
