@@ -39,7 +39,8 @@ try {
   await page.waitForSelector('.recordings'); // blocks if not logged in
   console.log('Logged in.');
 
-  await page.waitForSelector('.broadcasts-table'); // TODO fine if empty?
+  // await page.waitForSelector('.broadcasts-table'); // blocks if there are no recordings
+  await page.waitForSelector('.recordings'); // TODO fine if empty?
   const rows = page.locator('tbody tr');
   console.log('Recordings:', await rows.count());
   for (const r of await rows.all()) {
