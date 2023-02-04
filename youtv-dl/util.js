@@ -1,3 +1,9 @@
+import prompts from 'prompts'; // alternatives: enquirer, inquirer
+// import enquirer from 'enquirer'; const { prompt } = enquirer;
+// single prompt that just returns the non-empty value instead of an object - why name things if there's just one?
+export const prompt = async o => (await prompts({name: 'name', type: 'text', message: 'Enter value', validate: s => s.length, ...o})).name;
+
+
 // https://stackoverflow.com/questions/37614649/how-can-i-download-and-save-a-file-using-the-fetch-api-node-js
 import { join, basename } from 'path';
 import { createWriteStream, existsSync, mkdirSync } from 'fs';

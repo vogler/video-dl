@@ -23,6 +23,7 @@
   "dependencies": {
     "cli-progress": "^3.11.2",
     "playwright": "^1.30.0",
-    "progress-stream": "^2.0.0"
+    "progress-stream": "^2.0.0",
+    "prompts": "^2.4.2"
   }
 }

@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 import { firefox } from 'playwright';
-import { downloadProgress } from './util.js';
+import { prompt, downloadProgress } from './util.js';
 
 // console.log(process.argv); // ['.../node', '.../youtv-dl', ...]
 const auth = process.argv.includes('auth');
@@ -12,6 +12,8 @@ const cfg = {
   headless: !show,
   width: Number(process.env.WIDTH) || 1280, // width of the opened browser
   height: Number(process.env.HEIGHT) || 1280, // height of the opened browser
+  email: process.env.EMAIL,
+  password: process.env.PASSWORD,
 }
 
 console.log(new Date(), 'started checking youtv.de');
@@ -29,12 +31,22 @@ const page = context.pages().length ? context.pages()[0] : await context.newPage
 try {
   await page.goto('https://www.youtv.de/videorekorder', { waitUntil: 'domcontentloaded' });
 
-  page.waitForURL('**/login').then(() => {
-    if (cfg.headless) {
-      console.error('Run `npx . auth` to login in the browser.');
-      process.exit(1);
+  page.waitForURL('**/login').then(async () => {
+    console.error('Not logged in.');
+    if (cfg.headless)
+      console.info('Run `npx . auth` to show the browser to login.');
+    else
+      console.info('You can now login in the opened browser.');
+    console.info('Press ESC to skip the prompts if you want to login in the browser.');
+    const email = cfg.email || await prompt({message: 'Enter email'});
+    const password = email && (cfg.password || await prompt({type: 'password', message: 'Enter password'}));
+    if (email && password) {
+      await page.fill('#session_email', email);
+      await page.fill('#session_password', password);
+      await page.click('input[value="Anmelden"]');
+    } else {
+      console.error('Waiting for you to login.');
     }
-    console.log('Please use the opened browser to login.');
   }).catch(_ => { });
   await page.waitForSelector('.recordings'); // blocks if not logged in
   console.log('Logged in.');
