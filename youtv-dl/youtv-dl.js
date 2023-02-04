@@ -51,8 +51,10 @@ try {
   await page.waitForSelector('.recordings'); // blocks if not logged in
   console.log('Logged in.');
 
-  // await page.waitForSelector('.broadcasts-table'); // blocks if there are no recordings
-  await page.waitForSelector('.recordings'); // TODO fine if empty?
+  // need to wait for request to recs.json to populate table; before there is .broadcast-message (same as if empty) which is then replaced by .broadcasts-table if not empty
+  // await Promise.any([page.waitForSelector('.broadcast-message'), page.waitForSelector('.broadcasts-table')]); // .broadcast-message always resolves since it's there initially
+  // const recs = page.waitForResponse('https://www.youtv.de/api/v2/recs.json'); // had this before the initial goto and await here, but only worked without context.close() at the end...
+  await page.waitForLoadState('networkidle'); // easiest solution
   const rows = page.locator('tbody tr');
   console.log('Recordings:', await rows.count());
   for (const r of await rows.all()) {
