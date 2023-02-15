@@ -70,7 +70,7 @@ try {
     if (resp == 'exists')
       console.log(' ', 'File already exists!');
     else
-      console.log(' ', 'Downloaaded', resp);
+      console.log(' ', 'Downloaded', resp);
     await page.waitForLoadState(); // needed if file exists
     await page.goBack(); // without the wait above got Error: NS_BINDING_ABORTED; same for goto()
   }
