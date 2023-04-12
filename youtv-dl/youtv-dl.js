@@ -64,7 +64,7 @@ try {
     await r.locator('.action-play').click();
     // console.log(' ', page.url());
     await page.waitForSelector('video');
-    const videoUrl = await page.locator('video').getAttribute('src');
+    const videoUrl = await page.locator('video source').first().getAttribute('src');
     console.log(' ', 'Downloading', videoUrl, 'to', cfg.videoDir);
     const resp = await downloadProgress(videoUrl, cfg.videoDir);
     if (resp == 'exists')
