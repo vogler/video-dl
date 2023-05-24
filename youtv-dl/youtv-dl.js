@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 import { firefox } from 'playwright';
-import { prompt, downloadProgress } from './util.js';
+import { datetime, prompt, downloadProgress } from './util.js';
 
 // console.log(process.argv); // ['.../node', '.../youtv-dl', ...]
 const auth = process.argv.includes('auth');
@@ -16,7 +16,7 @@ const cfg = {
   password: process.env.PASSWORD,
 }
 
-console.log(new Date(), 'started checking youtv.de');
+console.log(datetime(), 'started checking youtv.de');
 
 // https://playwright.dev/docs/auth#multi-factor-authentication
 const context = await firefox.launchPersistentContext('data/browser', {

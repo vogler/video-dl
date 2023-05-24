@@ -1,3 +1,9 @@
+// date and time as UTC (no timezone offset) in nicely readable and sortable format, e.g., 2022-10-06 12:05:27.313
+export const datetimeUTC = (d = new Date()) => d.toISOString().replace('T', ' ').replace('Z', '');
+// same as datetimeUTC() but for local timezone, e.g., UTC + 2h for the above in DE
+export const datetime = (d = new Date()) => datetimeUTC(new Date(d.getTime() - d.getTimezoneOffset() * 60000));
+
+
 import prompts from 'prompts'; // alternatives: enquirer, inquirer
 // import enquirer from 'enquirer'; const { prompt } = enquirer;
 // single prompt that just returns the non-empty value instead of an object - why name things if there's just one?
