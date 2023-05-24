@@ -51,4 +51,4 @@ youtube-dl "https://www.ardmediathek.de$(curl -s https://www.ardmediathek.de/sen
 # delete files older than 7 days. TODO only delete if not accessed
 # `mount` says / is mounted with noatime - so access times are not updated
 # https://unix.stackexchange.com/questions/8840/last-time-file-opened
-find . -type f -ctime +7 -exec rm -f {} \; # -atime/-mtime were problematic since ytdl sets atime/mtime to Last-modified header (unless --no-mtime) and sat1 has it set to constant 2000-11-19 9:52. However, -ctime (stat: Change) is fine since it changes when metadata change which happens on download.
+find . -type f -atime +7 -exec rm -f {} \; # -atime/-mtime were problematic since ytdl sets atime/mtime to Last-modified header (unless --no-mtime) and sat1 has it set to constant 2000-11-19 9:52. However, -ctime (stat: Change) is fine since it changes when metadata change which happens on download.
