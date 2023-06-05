@@ -7,7 +7,7 @@
 # serve with: cd videos; npx http-server
 # open rpi4:8080
 
-date # print datetime for log
+date -R # print datetime for log
 videos="$(dirname "$0")/videos"
 mkdir -p $videos
 cd $videos
@@ -54,3 +54,4 @@ youtube-dl "https://www.ardmediathek.de$(curl -s https://www.ardmediathek.de/sen
 # `mount` says / is mounted with noatime - so access times are not updated
 # https://unix.stackexchange.com/questions/8840/last-time-file-opened
 find . -type f -atime +7 -exec rm -f {} \; # -atime/-mtime were problematic since ytdl sets atime/mtime to Last-modified header (unless --no-mtime) and sat1 has it set to constant 2000-11-19 9:52. However, -ctime (stat: Change) is fine since it changes when metadata change which happens on download.
+echo
