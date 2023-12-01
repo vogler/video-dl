@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 import { firefox } from 'playwright';
+import 'dotenv/config' // loads environment variables from .env
 import { datetime, prompt, downloadProgress } from './util.js';
 
 // console.log(process.argv); // ['.../node', '.../youtv-dl', ...]
