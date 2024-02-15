@@ -1,4 +1,4 @@
-#!/bin/zsh 
+#!/bin/bash 
 
 # run this script as a cronjob to have news to watch for breakfast
 # $ crontab -e
@@ -6,6 +6,9 @@
 
 # serve with: cd videos; npx http-server
 # open rpi4:8080
+
+# set -v
+trap 'echo "ERROR: $BASH_SOURCE:$LINENO $BASH_COMMAND" >&2' ERR
 
 date -R # print datetime for log
 videos="$(dirname "$0")/videos"
@@ -47,8 +50,9 @@ wget --timeout=5 -c $(curl -s https://www.tagesschau.de/multimedia/sendung/tages
   # latest=$(curl -s https://boerse.ard.de/multimedia/audios-und-videos/boerse-vor-acht/index.html | grep -o 'https.*boerse-vor-acht/hr_.*\.html' | head -n1)
   # wget -nc $(curl -s $latest | grep -o "https://.*1280x720-50p-5000kbit\.mp4")
 # new:
-# somehow youtube-dl is much faster here than yt-dlp
-youtube-dl "https://www.ardmediathek.de$(curl -s https://www.ardmediathek.de/sendung/wirtschaft-vor-acht/Y3JpZDovL2Rhc2Vyc3RlLmRlL3dpcnRzY2hhZnQgdm9yIGFjaHQ | grep -P -o '/video/wirtschaft-vor-acht/.*?(?=")' | head -n1)"
+# somehow youtube-dl was much faster here than yt-dlp...
+# currently fails with ERROR: [ARDBetaMediathek] ... Unable to download JSON metadata: HTTP Error 404; see https://github.com/yt-dlp/yt-dlp/issues/7666
+yt-dlp "https://www.ardmediathek.de$(curl -s https://www.ardmediathek.de/sendung/wirtschaft-vor-acht/Y3JpZDovL2Rhc2Vyc3RlLmRlL3dpcnRzY2hhZnQgdm9yIGFjaHQ | grep -P -o '/video/wirtschaft-vor-acht/.*?(?=")' | head -n1)"
 
 # delete files older than 7 days. TODO only delete if not accessed
 # `mount` says / is mounted with noatime - so access times are not updated
